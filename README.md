@@ -6,13 +6,17 @@
 
 <img src="pic/load_data.jpg">
 
+#  📚 spatial relationships
+The temporal correlation represents the correlation between different time steps and the spatial correlation represents the correlation between different variables.
+We performed a data exploration using the heatmap to present spatial relationships on commercial building electricity load dataset.
 
 
 # :open_file_folder: Dataset
-📗 we are using a real usecase dataset from power company to electricity load forecasting
+📗 I am using a real usecase dataset from power company to electricity load forecasting
 
 📗 Given a sequence of data samples indexed in time, x1, . . . , xt, . . ., each data sample xt ∈ RD represents the data at time t and comprises D features. Training data are denoted as D ={(x1, y1), (x2, y2), . . . (xN, yN)}, where x1 = x1, . . . , xT and y1 = yT+1, . . . , yT+1+m denote the first sequence and the corresponding label, x2 = x2, . . . , xT+1 and y2 = yT+2, . . . , yT+2+m are the second sequence and the corresponding label, and so on. This work uses time series data of length T to predict future results of the horizon size m. In the experiments, we use different values of T and m to carry out the experiments.
  
+
 
 #  📚 Analysis and transforms
 
