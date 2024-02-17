@@ -34,14 +34,17 @@
 📍 I use three embedding techniques to capture representative information of the data, time embedding, token embedding, and position embedding
 
 * time embedding
+  
 📍 The time features are cyclical, such as year, month, day, hour, and holiday features; furthermore, the electricity consumption changes regularly with time features. Holidays have a great impact on electricity load.
 
 📍 we use the embedding technique for the time feature and then project the input into a space of d-dimension by a feed-forward layer.
 
 * Token embedding
+  
 📍 We have D features at each time step t. To extract the local information of the data, we use the 1D convolution layer to obtain the d-dimensional embedding vectors (d > D) in time steps
 
 * Position embedding:
+  
 📍 To obtain information on the order of the input, we add the positional embedding to the input embedding of the sequence.
 
 📍 The embedding is performed by sinusoidal waves, which show closeness in the vector representation with respect to small changes in positions.
@@ -56,8 +59,23 @@ encoder comprises a stack of two identical blocks, each of which comprises sever
 ## Decoder
 the decoder comprises masked multi-head ProbSparse attention layer, dropout layer, add & norm layer, multi-head attention layer, dropout layer, add & norm layer, positionwise FFN layer, add & norm layer and fully connected layer in order. In addition, we add dropout to the embedding layer, position-wise feed-forward network layer and attention outputs in encoder and decoder.
 
+## Multi-head mechanism
+📍 the multi-head mechanism is used in the calculation of the ProbSparse attention. The Q, K, and V can map the input vector to different sub-spaces through different linear layers.
+
+📍 In this case, attention produces different sparse query-key pairs for each head. Hence, the integrated effect of several attentions at the same time may be better than
+that of a single attention.
+
 ## Multi-head ProbSparse Self-attention with Long Short-Term Memory Block
-📍 Zhou et al. [[1]](https://ojs.aaai.org/index.php/AAAI/article/view/17325) found that the probability distribution of self-attention has a potential sparsity, that is, only a few inner products contribute to the main attention. 
+Given an input sequence, self-attention [[1]](https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html) is a mechanism that can produce a new sequence of the same length, and each output element is based on the aggregation
+of inputs of different positions by calculating the similarity and determining the attention weights on these inputs.
+
+📍 Zhou et al. [[2]](https://ojs.aaai.org/index.php/AAAI/article/view/17325) found that the probability distribution of self-attention has a potential sparsity, that is, only a few inner products contribute to the main attention. 
+
+📍 Therefore, they proposed ProbSparse attention Zhou et al. [[2]](https://ojs.aaai.org/index.php/AAAI/article/view/17325) to address this problem by computing a limited selection of similarity scores from a sequence rather than all possible pairs.
+
+
+
+
 
 📍 the use of memory and space in the self-attention mechanism would decrease.
 
