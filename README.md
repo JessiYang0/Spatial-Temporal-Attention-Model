@@ -16,7 +16,7 @@
 <img src="pic/heatmap.jpg">
 
 # :open_file_folder: Dataset
-📗 I am using a real usecase dataset from power company to electricity load forecasting
+📗 I am using a real usecase dataset from power company to electricity load forecasting. The number of data samples in the dataset is 20424, and the time resolution is one hour.
 
 📗 Given a sequence of data samples indexed in time, x1, . . . , xt, . . ., each data sample xt ∈ RD represents the data at time t and comprises D features. Training data are denoted as D ={(x1, y1), (x2, y2), . . . (xN, yN)}, where x1 = x1, . . . , xT and y1 = yT+1, . . . , yT+1+m denote the first sequence and the corresponding label, x2 = x2, . . . , xT+1 and y2 = yT+2, . . . , yT+2+m are the second sequence and the corresponding label, and so on. This work uses time series data of length T to predict future results of the horizon size m. In the experiments, we use different values of T and m to carry out the experiments.
 
@@ -82,6 +82,24 @@ that of a single attention.
   * Spatial convolution: The filters of size 1×k are used to capture the spatial information pattern of all time steps, where k is the kernel size. Once the convolution process is completed, a vector of size 1×T is produced using the kernel to advance over time steps. Given nq filters, the output matrix Hq is of size nq × T by concatenating all the filters along the first dimension
   * Temporal convolution: use a 1D convolution in parallel to model local temporal patterns. The input matrix of the previous layer is transposed for the temporal dependencies, and the filters are of the size 1 × k filters.
 
+#  📚 Model Training
+## Combination of Optimizer
+📍 use SGD and ADAM to optimize the parameters of the attention layer and the other layers, respectively.
+
+📍 In the attention layer, our aim is to update the parameters in a stable manner, which can boost the prediction performance and have a better generalization of the testing data. Furthermore, ADAM is used to optimize the other layers, such as the convolution layer, to increase the training speed and convergence during the training phase.
+
+## Experimental Settings
+To demonstrate that our model can be applied to long-term prediction, we use different input window sizes T and forecasting horizon values m to conduct forecasting experiments, in which T ∈ {72, 168, 240, 360} and m ∈ {72, 168, 240, 360}. The previous time period of size T is used to predict the next time period of sizem and the time step is 1 hour.
+
+#  📚 Experimental Results
+* In the experiments, we use state-of-the-art or several classical methods as comparison methods, including methods based on the attention mechanism and the classical deep learning methods used in time series forecasting.
+  * Informer [[2]](https://ojs.aaai.org/index.php/AAAI/article/view/17325)
+  * Transformer [[1]](https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html)
+  * A2-Nets [[3]](https://dl.acm.org/doi/abs/10.5555/3326943.3326976)
+  * MLP-Mixer [[4]](https://proceedings.neurips.cc/paper/2021/hash/cba0a4ee5ccd02fda0fe3f9a3e7b89fe-Abstract.html)
+  * ECA-Net [[5]](https://arxiv.org/abs/1910.03151)
+
+* The experimental results show that the proposed model outperforms other comparison models. Despite the proposed method being based on the informer, the proposed method comprises spatial and temporal convolution modules for time series; both can capture spatial and temporal correlations between time steps and features.
 
 
 * Time series decomposition
