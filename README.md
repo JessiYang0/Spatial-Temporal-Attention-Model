@@ -4,7 +4,7 @@
 📍 Building load forecasting is a multivariate time-series forecasting problem. An accurate forecasting model should capture the complicated dependency between the variables at each time point and the long-range temporal relationship between the data points
 
 
-<img src="results/beijing.jpg">
+<img src="pic/load_data.jpg">
 
 
 
