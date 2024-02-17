@@ -7,8 +7,11 @@
 <img src="pic/load_data.jpg">
 
 #  📚 spatial relationships
-The temporal correlation represents the correlation between different time steps and the spatial correlation represents the correlation between different variables.
-We performed a data exploration using the heatmap to present spatial relationships on commercial building electricity load dataset.
+📍 The temporal correlation represents the correlation between different time steps and the spatial correlation represents the correlation between different variables.
+
+📍 We performed a data exploration using the heatmap to present spatial relationships on commercial building electricity load dataset.
+
+📍 Thus, allowing the proposed model to learn information in both time and spatial domains jointly is important.
 
 <img src="pic/heatmap.jpg">
 
@@ -18,13 +21,45 @@ We performed a data exploration using the heatmap to present spatial relationshi
 📗 Given a sequence of data samples indexed in time, x1, . . . , xt, . . ., each data sample xt ∈ RD represents the data at time t and comprises D features. Training data are denoted as D ={(x1, y1), (x2, y2), . . . (xN, yN)}, where x1 = x1, . . . , xT and y1 = yT+1, . . . , yT+1+m denote the first sequence and the corresponding label, x2 = x2, . . . , xT+1 and y2 = yT+2, . . . , yT+2+m are the second sequence and the corresponding label, and so on. This work uses time series data of length T to predict future results of the horizon size m. In the experiments, we use different values of T and m to carry out the experiments.
 
 #  📚 Feature Engineering
-## Seasonal Extraction
+##  Seasonal Extraction
+📍 If seasonality and trend can be extracted or identified from time-series data, these extracted components can help the predictive model improve the forecasting performance
+
+📍 I propose using the convolution filter and moving average to extract the seasonality from time-series data for adding feature in model.
+
+📍 that seasonality information can be extracted from the five features used in the experimental dataset
+
+## Data Embedding
+📍 The main advantage of the embedding layer is that it can embed much more information into an embedding vector
+
+📍 I use three embedding techniques to capture representative information of the data, time embedding, token embedding, and position embedding
+
+* time embedding
+📍 The time features are cyclical, such as year, month, day, hour, and holiday features; furthermore, the electricity consumption changes regularly with time features. Holidays have a great impact on electricity load.
+
+📍 we use the embedding technique for the time feature and then project the input into a space of d-dimension by a feed-forward layer.
+
+* Token embedding
+📍 We have D features at each time step t. To extract the local information of the data, we use the 1D convolution layer to obtain the d-dimensional embedding vectors (d > D) in time steps
+
+* Position embedding:
+📍 To obtain information on the order of the input, we add the positional embedding to the input embedding of the sequence.
+
+📍 The embedding is performed by sinusoidal waves, which show closeness in the vector representation with respect to small changes in positions.
 
 #  📚 Mdoel structure
 Framework first uses the seasonal extraction approach to extract the seasonality of data, then uses the time embedding technique to learn the data representation.
 Subsequently, the data is the input of the encoder-decoder model, which comprises an encoder and a decoder.
 
+## Encoder
+encoder comprises a stack of two identical blocks, each of which comprises several components: the multi-head ProbSparse attention layer, dropout layer, add & norm layer, positionwise feed-forward network (FFN) layer, long short-term memory (LSTM) layer, add & norm layer, spatial & temporal convolution layer, and maxpooling layer in order.
 
+## Decoder
+the decoder comprises masked multi-head ProbSparse attention layer, dropout layer, add & norm layer, multi-head attention layer, dropout layer, add & norm layer, positionwise FFN layer, add & norm layer and fully connected layer in order. In addition, we add dropout to the embedding layer, position-wise feed-forward network layer and attention outputs in encoder and decoder.
+
+## Multi-head ProbSparse Self-attention with Long Short-Term Memory Block
+📍 Zhou et al. [[1]](https://ojs.aaai.org/index.php/AAAI/article/view/17325) found that the probability distribution of self-attention has a potential sparsity, that is, only a few inner products contribute to the main attention. 
+
+📍 the use of memory and space in the self-attention mechanism would decrease.
 
 
 * Time series decomposition
