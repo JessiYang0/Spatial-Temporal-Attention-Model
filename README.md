@@ -41,7 +41,7 @@
 
 📍 we use the embedding technique for the time feature and then project the input into a space of d-dimension by a feed-forward layer.
 
-<img src="pic/time_embedding.jpg">
+<img src="pic/time_embedding.png">
 
 ### Token embedding
   
