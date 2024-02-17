@@ -115,6 +115,7 @@ To demonstrate that our model can be applied to long-term prediction, we use dif
 #  📚 Experimental Results
 <img src="pic/pred_result.png">
 * In the experiments, we use state-of-the-art or several classical methods as comparison methods, including methods based on the attention mechanism and the classical deep learning methods used in time series forecasting.
+
   * Informer [[2]](https://ojs.aaai.org/index.php/AAAI/article/view/17325)
   * Transformer [[1]](https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html)
   * A2-Nets [[3]](https://dl.acm.org/doi/abs/10.5555/3326943.3326976)
