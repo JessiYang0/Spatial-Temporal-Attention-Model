@@ -49,7 +49,7 @@
 
 📍 The embedding is performed by sinusoidal waves, which show closeness in the vector representation with respect to small changes in positions.
 
-#  📚 Mdoel structure
+#  📚 Model structure
 Framework first uses the seasonal extraction approach to extract the seasonality of data, then uses the time embedding technique to learn the data representation.
 Subsequently, the data is the input of the encoder-decoder model, which comprises an encoder and a decoder.
 
@@ -60,7 +60,7 @@ encoder comprises a stack of two identical blocks, each of which comprises sever
 the decoder comprises masked multi-head ProbSparse attention layer, dropout layer, add & norm layer, multi-head attention layer, dropout layer, add & norm layer, positionwise FFN layer, add & norm layer and fully connected layer in order. In addition, we add dropout to the embedding layer, position-wise feed-forward network layer and attention outputs in encoder and decoder.
 
 ## Multi-head mechanism
-Given an input sequence, self-attention [[1](https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html) is a mechanism that can produce a new sequence of the same length, and each output element is based on the aggregation
+Given an input sequence, self-attention [[1]](https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html) is a mechanism that can produce a new sequence of the same length, and each output element is based on the aggregation
 of inputs of different positions by calculating the similarity and determining the attention weights on these inputs.
 
 📍 the multi-head mechanism is used in the calculation of the ProbSparse attention. The Q, K, and V can map the input vector to different sub-spaces through different linear layers.
@@ -73,11 +73,15 @@ that of a single attention.
 
 📍 Therefore, they proposed ProbSparse attention Zhou et al. [[2]](https://ojs.aaai.org/index.php/AAAI/article/view/17325) to address this problem by computing a limited selection of similarity scores from a sequence rather than all possible pairs.
 
-
-
-
-
 📍 the use of memory and space in the self-attention mechanism would decrease.
+
+## Spatial and Temporal Convolution Block
+* multivariate time series data can be characterized by high spatial-temporal dependency attributes. The data used in this thesis include the forecast sequence T, and many variables are involved in each time step.
+
+* To capture the spatial dependence and the temporal dependence, we use two 1D convolutions with a proper stride and padding in parallel to summarize the sequence information.
+  * Spatial convolution: The filters of size 1×k are used to capture the spatial information pattern of all time steps, where k is the kernel size. Once the convolution process is completed, a vector of size 1×T is produced using the kernel to advance over time steps. Given nq filters, the output matrix Hq is of size nq × T by concatenating all the filters along the first dimension
+  * Temporal convolution: use a 1D convolution in parallel to model local temporal patterns. The input matrix of the previous layer is transposed for the temporal dependencies, and the filters are of the size 1 × k filters.
+
 
 
 * Time series decomposition
