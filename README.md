@@ -1,5 +1,5 @@
 # Spatial-Temporal-Attention-Model
-📍 I proposes a novel spatio-temporal attention model to learn the spatial and temporal dependence from the time-series data.
+📍 proposes a novel spatio-temporal attention model to learn the spatial and temporal dependence from the time-series data.
 
 📍 Building load forecasting is a multivariate time-series forecasting problem. An accurate forecasting model should capture the complicated dependency between the variables at each time point and the long-range temporal relationship between the data points
 
